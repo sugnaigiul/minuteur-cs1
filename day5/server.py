@@ -3,20 +3,39 @@ from typing import Optional
 import json
 import datetime
 import logging
+import asyncio
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 
 logging.basicConfig(level=logging.DEBUG)
 
-app = FastAPI()
+async def charge():
+  while True:
+    task_list = get_task_list_from_file()
+    for index, task in enumerate(task_list.tasks):
+      if task.timer > 0:
+        task.timer = task.timer -1
+    print("loop")
+    write_task_list(task_list)
+    await asyncio.sleep(1)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+  print("starting app")
+  asyncio.create_task(charge())
+  yield
+  print('closing app')
+
+app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
 )
-
+  
 @app.get("/", response_class=HTMLResponse)
 def get_index():
   with open('index.html', 'r') as file:

@@ -175,16 +175,6 @@
 
   <script>
 
-    var count = 60;
-    var fxn = function() {
-      if (count > 0){
-        count--;
-        document.getElementById('time').innerHTML = count;
-      }
-      
-    }
-    setInterval(fxn, 1000);
-
     const { createApp } = Vue
     createApp({
 
@@ -201,6 +191,7 @@
 
       async mounted() {
         await this.getTasks()
+        setInterval(() => this.getTasks(), 1000);
       },
 
       methods: {
