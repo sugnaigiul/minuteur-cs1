@@ -119,6 +119,8 @@
       Battery charge timer estimator.
     </div>
 
+    <div id=time></div>
+
 
     <div id="form">
       <input
@@ -146,7 +148,7 @@
     <div id="tasks">
       <div v-for="task in tasks" class="task">
 
-        <div class="task-title">
+        <div class="task-title" id="decom">
           {{ task.title }}
         </div>
 
@@ -172,6 +174,17 @@
   </div>
 
   <script>
+
+    var count = 60;
+    var fxn = function() {
+      if (count > 0){
+        count--;
+        document.getElementById('time').innerHTML = count;
+      }
+      
+    }
+    setInterval(fxn, 1000);
+
     const { createApp } = Vue
     createApp({
 
