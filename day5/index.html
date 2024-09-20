@@ -133,6 +133,12 @@
         @keyup.enter="addTask"
       />
 
+      <input
+      placeholder="Charging time"
+      v-model="taskTime"
+      @keyup.enter="addTask"
+    />
+
       <div class="form-actions" v-if="edit">
         <div class="button" @click="newTitle">
           <div class="fa-solid fa-pen-to-square"></div>
@@ -187,6 +193,8 @@
           loading: true,
           edit: false,
           taskTitle: '',
+          taskTime: '',
+          defaultTime: 60,
           tasks: [],
           // removing trailing slash after URL for clarity
           apiUrl: window.location.toString().slice(0, -1),
@@ -195,6 +203,7 @@
 
       async mounted() {
         await this.getTasks()
+        this.taskTime = this.defaultTime
         setInterval(() => this.getTasks(), 1000);
       },
 
@@ -224,10 +233,12 @@
         async addTask() {
           this.loading = true
           console.log(this.taskTitle)
+          console.log(this.taskTime)
           const response = await axios.post(`${this.apiUrl}/task`, {
-            title: this.taskTitle, timer: 60
+            title: this.taskTitle, timer: this.taskTime
           })
           this.taskTitle = ''
+          this.taskTime = this.defaultTime
           await this.getTasks()
         },
         

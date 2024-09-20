@@ -44,7 +44,7 @@ def get_index():
 class Task(BaseModel):
   id: Optional[int] = -1
   title: str
-  timer: int
+  timer: int = 60
   added_date: Optional[str] = None
   done: Optional[bool] = False
 
