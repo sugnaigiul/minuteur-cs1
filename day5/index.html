@@ -263,16 +263,6 @@
           await this.getTasks()
         },
 
-        async toggleDone(task) {
-          this.loading = true
-          const new_done = !task.done
-          const response = await axios.put(`${this.apiUrl}/task`, {
-            id: task.id,
-            new_done,
-          })
-          await this.getTasks()
-        },
-
       },
     }).mount('#app')
   </script>
