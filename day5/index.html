@@ -113,6 +113,10 @@
     .task-actions {
       display: flex;
     }
+
+    .task-done {
+      background-color: lightgreen;
+    }
   </style>
 </head>
 
@@ -156,7 +160,7 @@
     </div>
 
     <div id="tasks">
-      <div v-for="task in tasks" class="task">
+      <div v-for="task in tasks" :class="['task', { 'task-done': task.timer === 0 }]">
 
         <div class="task-title" id="decom">
           {{ task.title }}
