@@ -137,6 +137,10 @@
     <div id="tasks">
       <div v-for="task in tasks" class="task">
 
+        <div class="timer">
+          TEST
+        </div>
+
         <div :class="{'task-title': true, strike: task.done}">
           {{ task.title }}
         </div>
