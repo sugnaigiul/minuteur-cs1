@@ -26,6 +26,9 @@
       font-style: italic;
       color: grey;
     }
+    .spacer {
+      flex-grow: 1;
+    }
 
     /* Document style */
 
@@ -88,14 +91,20 @@
       margin-top: 10px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: start;
     }
     .task-title {
-      flex-grow: 1;
       text-align: left;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+    }
+    .task-timer {
+      text-align: left;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      padding-left: 10px;
     }
     .task-actions {
       display: flex;
@@ -137,12 +146,15 @@
     <div id="tasks">
       <div v-for="task in tasks" class="task">
 
-        <div :class="{'task-timer': true, strike: task.done}">
+        <div class="task-title">
+          {{ task.title }}
+        </div>
+
+        <div class="task-timer">
           {{ task.timer }}
         </div>
 
-        <div :class="{'task-title': true, strike: task.done}">
-          {{ task.title }}
+        <div class="spacer">
         </div>
 
         <div class="task-actions">
