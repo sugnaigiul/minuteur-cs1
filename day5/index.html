@@ -167,7 +167,7 @@
         </div>
 
         <div class="task-timer">
-          -&nbsp;&nbsp;Time left : {{ task.timer }} seconds
+          -&nbsp;&nbsp;Time left : {{ Math.floor(task.timer / 3600) }}h {{ (Math.floor((task.timer % 3600) / 60)) }}m {{ ((task.timer % 3600) % 60) }}s
         </div>
 
         <div class="spacer">
@@ -238,9 +238,10 @@
           this.loading = true
           console.log(this.taskTitle)
           console.log(this.taskTime)
+          if (this.taskTitle != ''){
           const response = await axios.post(`${this.apiUrl}/task`, {
             title: this.taskTitle, timer: this.taskTime
-          })
+          })}
           this.taskTitle = ''
           this.taskTime = this.defaultTime
           await this.getTasks()
