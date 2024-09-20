@@ -137,8 +137,8 @@
     <div id="tasks">
       <div v-for="task in tasks" class="task">
 
-        <div class="timer">
-          TEST
+        <div :class="{'task-timer': true, strike: task.done}">
+          {{ task.timer }}
         </div>
 
         <div :class="{'task-title': true, strike: task.done}">
@@ -198,7 +198,7 @@
           this.loading = true
           console.log(this.taskTitle)
           const response = await axios.post(`${this.apiUrl}/task`, {
-            title: this.taskTitle,
+            title: this.taskTitle, timer: 60
           })
           this.taskTitle = ''
           await this.getTasks()
