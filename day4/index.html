@@ -107,13 +107,13 @@
   <div id="app">
 
     <div id="title">
-      TODO app
+      Battery charge timer estimator.
     </div>
 
 
     <div id="form">
       <input
-        placeholder="What you gonna do?"
+        placeholder="Battery name"
         v-model="taskTitle"
         @keyup.enter="addTask"
       />
@@ -136,17 +136,6 @@
 
     <div id="tasks">
       <div v-for="task in tasks" class="task">
-
-        <div class="button" @click="toggleDone(task)">
-          <div
-            v-if="task.done"
-            class="fa-regular fa-square-check"
-          ></div>
-          <div
-            v-else
-            class="fa-regular fa-square"
-          ></div>
-        </div>
 
         <div :class="{'task-title': true, strike: task.done}">
           {{ task.title }}
